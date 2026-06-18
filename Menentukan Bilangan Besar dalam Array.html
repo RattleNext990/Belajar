@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menentukan Bilangan Terbesar dalam Array</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bilangan Terbesar dalam Array</h1>
+        <p>Masukkan angka-angka dipisahkan dengan koma.</p>
+        <input id="angkaInput" type="text" placeholder="Contoh: 3, 7, 1, 9, 4" />
+        <button id="hitungBtn">Cari Bilangan Terbesar</button>
+        <div id="hasil" class="result"></div>
+    </div>
+
+    <script>
+        function cariBilanganTerbesar(array) {
+            if (!array || array.length === 0) {
+                return null;
+            }
+            let terbesar = array[0];
+            for (let i = 1; i < array.length; i++) {
+                if (array[i] > terbesar) {
+                    terbesar = array[i];
+                }
+            }
+            return terbesar;
+        }
+
+        function ambilArrayDariInput(input) {
+            return input
+                .split(',')
+                .map(item => item.trim())
+                .filter(item => item !== '')
+                .map(Number)
+                .filter(item => !Number.isNaN(item));
+        }
+
+        document.getElementById('hitungBtn').addEventListener('click', function () {
+            const rawInput = document.getElementById('angkaInput').value;
+            const angkaArray = ambilArrayDariInput(rawInput);
+
+            const hasilElement = document.getElementById('hasil');
+            if (angkaArray.length === 0) {
+                hasilElement.textContent = 'Silakan masukkan angka yang valid.';
+                return;
+            }
+
+            const terbesar = cariBilanganTerbesar(angkaArray);
+            hasilElement.textContent = 'Bilangan terbesar adalah: ' + terbesar;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <title>Konversi Mol</title>
+  <style>
+    body { font-family: sans-serif; max-width: 640px; margin: 2rem auto; padding: 1rem; }
+    label, input, select, button { display: block; margin: 0.5rem 0; width: 100%; max-width: 320px; }
+    button { margin-top: 1rem; padding: 0.5rem; }
+    #hasil { margin-top: 1rem; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Hitung Mol dengan Stoikiometri</h1>
+  <p>Masukkan koefisien reaksi dan jumlah mol salah satu zat, lalu hitung mol zat lain.</p>
+  <form id="form">
+    <label>Koefisien zat A
+      <input type="number" id="coefA" value="1" min="0.001" step="0.001">
+    </label>
+    <label>Koefisien zat B
+      <input type="number" id="coefB" value="1" min="0.001" step="0.001">
+    </label>
+    <label>Mol zat yang diketahui
+      <input type="number" id="molKnown" value="1" min="0" step="any">
+    </label>
+    <label>Pilih zat yang diketahui
+      <select id="knownType">
+        <option value="A">A</option>
+        <option value="B">B</option>
+      </select>
+    </label>
+    <button type="button" onclick="hitungMol()">Hitung Mol</button>
+  </form>
+  <div id="hasil"></div>
+  <script>
+    function hitungMol() {
+      var coefA = parseFloat(document.getElementById('coefA').value);
+      var coefB = parseFloat(document.getElementById('coefB').value);
+      var molKnown = parseFloat(document.getElementById('molKnown').value);
+      var knownType = document.getElementById('knownType').value;
+      if (!coefA || !coefB || molKnown < 0 || isNaN(molKnown)) {
+        document.getElementById('hasil').textContent = 'Masukkan nilai valid untuk semua bidang.';
+        return;
+      }
+      var molA, molB;
+      if (knownType === 'A') {
+        molA = molKnown;
+        molB = molA * coefB / coefA;
+      } else {
+        molB = molKnown;
+        molA = molB * coefA / coefB;
+      }
+      document.getElementById('hasil').innerHTML =
+        'Mol A = ' + molA.toFixed(4) + ' mol<br>' +
+        'Mol B = ' + molB.toFixed(4) + ' mol';
+    }
+  </script>
+</body>
+</html>

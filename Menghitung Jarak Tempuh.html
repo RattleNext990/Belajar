@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Menghitung Jarak Tempuh</title>
+<style>
+body{font-family:system-ui,sans-serif;background:#f4f4f4;color:#111;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+.card{background:#fff;padding:24px 28px;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.08);width:320px}
+h1{font-size:1.2rem;margin:0 0 18px}
+label{display:block;font-size:.95rem;margin:.8rem 0 0 0}
+input{width:100%;padding:10px 12px;margin-top:6px;border:1px solid #d7d7d7;border-radius:10px;outline:none}
+button{width:100%;margin-top:18px;padding:11px 14px;border:none;border-radius:10px;background:#111;color:#fff;font-weight:600;cursor:pointer}
+button:hover{background:#333}
+.output{margin-top:18px;padding:14px;border-radius:10px;background:#fafafa;border:1px solid #e5e5e5;font-size:.95rem}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>Menghitung Jarak Tempuh</h1>
+
+<label for="speed">Kecepatan (km/jam)</label>
+<input id="speed" type="number" min="0" step="any" placeholder="Contoh: 60">
+<label for="time">Waktu (jam)</label>
+<input id="time" type="number" min="0" step="any" placeholder="Contoh: 2.5">
+<button type="button" onclick="calculateDistance()">Hitung</button>
+<div id="result" class="output">Masukkan nilai lalu klik Hitung.</div>
+</div>
+<script>
+function calculateDistance() {
+  var speed = parseFloat(document.getElementById('speed').value);
+  var time = parseFloat(document.getElementById('time').value);
+  var result = document.getElementById('result');
+  if (isNaN(speed) || isNaN(time) || speed < 0 || time < 0) {
+    result.textContent = 'Input tidak valid. Masukkan angka positif untuk kecepatan dan waktu.';
+    return;
+  }
+  var distance = speed * time;
+  result.textContent = 'Jarak tempuh: ' + distance.toFixed(2) + ' km';
+}
+</script>
+</body>
+</html>
